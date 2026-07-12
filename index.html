@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Busan Trip 2026</title>
+    <style>
+        :root {
+            --bg-main: #1A1C1E;
+            --card-bg: #24272C;
+            --text-main: #E2E2E2;
+            --text-muted: #9BA1A6;
+            --morandi-blue: #8FA2B5;
+            --morandi-green: #9DAF9B;
+            --morandi-pink: #C5A0A0;
+            --naver-green: #03C75A;
+            --border-color: #33373E;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 16px;
+            padding-bottom: 90px;
+            letter-spacing: 0.3px;
+        }
+
+        header {
+            text-align: center;
+            padding: 12px 0 20px 0;
+        }
+        header h1 { font-size: 1.35rem; font-weight: 500; color: var(--text-main); letter-spacing: 1.5px; }
+        header p { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+        .flight-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+        }
+        .flight-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--morandi-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .flight-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .flight-row:last-child { margin-bottom: 0; }
+
+        .day-panel { display: none; }
+        .day-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .day-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--morandi-blue);
+        }
+        .day-info-bar .date { font-size: 1.1rem; font-weight: 600; color: var(--morandi-blue); }
+        .day-info-bar .subtitle { font-size: 0.85rem; color: var(--text-muted); }
+
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            bottom: 6px;
+            width: 1px;
+            background-color: var(--border-color);
+        }
+        .item {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+        .item::before {
+            content: '';
+            position: absolute;
+            left: -19px;
+            top: 18px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--morandi-blue);
+        }
+        .time {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--morandi-blue);
+            margin-bottom: 4px;
+        }
+        .title { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
+        .desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+
+        .btn-group {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .tag-btn, .map-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .tag-food { background-color: rgba(197, 160, 160, 0.15); color: var(--morandi-pink); }
+        .tag-spot { background-color: rgba(157, 175, 155, 0.15); color: var(--morandi-green); }
+        .map-btn { background-color: rgba(3, 199, 90, 0.12); color: #20D071; border: 1px solid rgba(3, 199, 90, 0.25); }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 28, 30, 0.92);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 4px 20px 4px;
+            z-index: 100;
+        }
+        .nav-btn {
+            border: none;
+            background: none;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .nav-btn.active {
+            background-color: var(--morandi-blue);
+            color: #1A1C1E;
+            font-weight: 600;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(226, 226, 226, 0.95);
+            color: #1A1C1E;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: none;
+            z-index: 1000;
+        }
+
+        /* PDF 列印優化 */
+        @media print {
+            body { background-color: #FFFFFF !important; color: #000000 !important; padding: 0 !important; }
+            .nav-bar, .toast, .btn-group { display: none !important; }
+            .day-panel { display: block !important; page-break-after: always; opacity: 1 !important; }
+            .day-panel:last-child { page-break-after: auto; }
+            .flight-card, .item { background: #FFFFFF !important; border: 1px solid #DDD !important; color: #000000 !important; }
+            .title { color: #000000 !important; }
+            .desc, .subtitle, header p { color: #555555 !important; }
+            .time, .day-info-bar .date, .flight-card h3 { color: #2C3E50 !important; }
+            .day-info-bar { border-bottom-color: #2C3E50 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BUSAN 2026</h1>
+        <p>慢活・藝術・美食 6 日行程</p>
+    </header>
+
+    <div class="flight-card">
+        <h3>Flight Information</h3>
+        <div class="flight-row">
+            <span>去程 (8/10)：TPE T1 ➔ PUS</span>
+            <span>13:35 - 17:05</span>
+        </div>
+        <div class="flight-row">
+            <span>回程 IT607 (8/15)：PUS ➔ TPE T1</span>
+            <span>20:45 - 22:10</span>
+        </div>
+    </div>
+
+    <!-- DAY 1 -->
+    <div id="day1" class="day-panel active">
+        <div class="day-info-bar">
+            <span class="date">Day 1 · 8/10 (週一)</span>
+            <span class="subtitle">抵達與廣安里夜景</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:35</div>
+                <div class="title">桃園國際機場 T1 報到</div>
+                <div class="desc">13:35 起飛，請提前 2 小時抵達辦理登機。</div>
+            </div>
+            <div class="item">
+                <div class="time">17:05</div>
+                <div class="title">抵達金海國際機場</div>
+                <div class="desc">辦理入境與提領行李。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/김해국제공항" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">18:15</div>
+                <div class="title">搭乘計程車</div>
+                <div class="desc">直達廣安里民宿（車程約 50 分鐘）。</div>
+            </div>
+            <div class="item">
+                <div class="time">20:00</div>
+                <div class="title">晚餐：味贊王鹽烤肉</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('맛찬들왕소금구이 광안리점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/맛찬들왕소금구이%20광안리점" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">21:30</div>
+                <div class="title">廣安里海灘散步</div>
+                <div class="desc">欣賞廣安大橋夜景，感受海風與慢活氛圍。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/광안리해수욕장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div id="day2" class="day-panel">
+        <div class="day-info-bar">
+            <span class="date">Day 2 · 8/11 (週二)</span>
+            <span class="subtitle">海雲台海岸與當代展覽</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:00</div>
+                <div class="title">天空膠囊列車 🚟</div>
+                <div class="desc">尾浦站 ➔ 青沙浦站（需提前預約包廂）。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/해운대블루라인파크%20미포정거장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">11:40</div>
+                <div class="title">午餐：青沙浦海景餐廳</div>
+                <div class="desc">享用在地烤貝類或海鮮料理。</div>
+            </div>
+            <div class="item">
+                <div class="time">13:00</div>
+                <div class="title">青沙浦踏石觀景台</div>
+                <div class="desc">漫步天空步道，於海岸咖啡廳放空。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/청사포다릿돌전망대" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">15:00</div>
+                <div class="title">Werner Bronkhorst 藝術展 🎨</div>
+                <div class="desc">Grand Josun Busan 4樓《The World’s a Canvas》。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/그랜드조선%20부산" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">16:30</div>
+                <div class="title">海雲台沙灘 & 傳統市場</div>
+                <div class="desc">出展場漫步沙灘，隨意漫逛周邊商圈。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/해운대시시장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">18:00</div>
+                <div class="title">晚餐：伍班長烤肉 / 錦繡河豚湯</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('오반장')">📋 複製伍班長</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/오반장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">19:30</div>
+                <div class="title">海雲台夜間散步</div>
+                <div class="desc">吹海風散步後，輕鬆搭車返回廣安里民宿。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div id="day3" class="day-panel">
+        <div class="day-info-bar">
+            <span class="date">Day 3 · 8/12 (週三)</span>
+            <span class="subtitle">影島白淺灘與松葉蟹饗宴</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:00</div>
+                <div class="title">影島白淺灘文化村</div>
+                <div class="desc">沿懸崖海岸步道散步，選家海景咖啡廳坐坐。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/흰여울문화마을" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">16:30</div>
+                <div class="title">晚餐：新東亞水產物綜合市場 🦀</div>
+                <div class="desc">挑選鮮甜松葉蟹現場代客料理，附蟹膏炒飯。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('신동아수산물종합시장')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/신동아수산물종합시장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">18:30</div>
+                <div class="title">龍頭山公園 & 釜山塔</div>
+                <div class="desc">搭手扶梯登塔，俯瞰港灣夕陽與夜景。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/용두산공원" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">19:30</div>
+                <div class="title">南浦洞商圈 / BIFF 廣場</div>
+                <div class="desc">漫步享用黑糖堅果糖餅，隨後返回民宿。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/BIFF광장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div id="day4" class="day-panel">
+        <div class="day-info-bar">
+            <span class="date">Day 4 · 8/13 (週四)</span>
+            <span class="subtitle">極速斜坡滑車與五星汗蒸幕</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:00</div>
+                <div class="title">機張 Skyline Luge 🏎️</div>
+                <div class="desc">搭纜車上山，駕駛斜坡滑車俯衝體驗速度感。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/스카이라인루지%20부산" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">13:00</div>
+                <div class="title">午餐：Centum City 百貨</div>
+                <div class="desc">美食街自由享用午餐。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/신세계백화점%20센텀시티점" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">14:30</div>
+                <div class="title">SPA LAND 汗蒸幕 ♨️</div>
+                <div class="desc">體驗五星級熱療室與溫泉，舒緩疲勞（限時 4 小時）。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/스파랜드%20센텀시티" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">19:00</div>
+                <div class="title">晚餐：外帶橋村炸雞</div>
+                <div class="desc">回民宿一邊看廣安里夜景一邊享用。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div id="day5" class="day-panel">
+        <div class="day-info-bar">
+            <span class="date">Day 5 · 8/14 (週五)</span>
+            <span class="subtitle">甘川壁畫村與西面美食</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:00</div>
+                <div class="title">甘川文化村</div>
+                <div class="desc">漫步彩繪山城，與小王子與沙漠狐狸合照。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/감천문화마을" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">14:00</div>
+                <div class="title">午餐：西面豬肉湯飯</div>
+                <div class="desc">體驗松亭三代豬肉湯飯等在地經典美食。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('송정3대국밥')">📋 複製松亭三代</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/송정3대국밥" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">15:30</div>
+                <div class="title">西面潮流商圈 / 地下街</div>
+                <div class="desc">慢逛潮流服飾與補貨伴手禮。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/서면역" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div id="day6" class="day-panel">
+        <div class="day-info-bar">
+            <span class="date">Day 6 · 8/15 (週六)</span>
+            <span class="subtitle">廣安里巡禮與返台</span>
+        </div>
+        <div class="timeline">
+            <div class="item">
+                <div class="time">11:30</div>
+                <div class="title">退房 ➔ 地鐵廣安站置物 🧳</div>
+                <div class="desc">將行李鎖在廣安站儲物櫃（T-Locker），雙手放空。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-spot" onclick="copyText('광안역')">📋 複製廣安站</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/광안역" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">12:00</div>
+                <div class="title">午餐：廣安里 彥陽烤牛肉</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('언양불고기 부산')">📋 複製烤肉店</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/언양불고기부산집" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">13:30</div>
+                <div class="title">海景咖啡廳下午茶</div>
+                <div class="desc">廣安里海灘最後放空漫步。</div>
+            </div>
+            <div class="item">
+                <div class="time">16:30</div>
+                <div class="title">取行李 ➔ 計程車前往機場</div>
+                <div class="desc">返回廣安站取行李後，直接搭計程車前往金海機場。</div>
+            </div>
+            <div class="item">
+                <div class="time">18:00</div>
+                <div class="title">抵達金海機場報到 🛃</div>
+                <div class="desc">辦理登機與退稅手續。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/김해국제공항" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">20:45</div>
+                <div class="title">IT607 航班起飛 ✈️</div>
+                <div class="desc">預計 22:10 抵達桃園國際機場 T1。</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <button class="nav-btn active" onclick="switchDay(1, this)">D1</button>
+        <button class="nav-btn" onclick="switchDay(2, this)">D2</button>
+        <button class="nav-btn" onclick="switchDay(3, this)">D3</button>
+        <button class="nav-btn" onclick="switchDay(4, this)">D4</button>
+        <button class="nav-btn" onclick="switchDay(5, this)">D5</button>
+        <button class="nav-btn" onclick="switchDay(6, this)">D6</button>
+    </nav>
+
+    <div class="toast" id="toast">已複製到剪貼簿</div>
+
+    <script>
+        function switchDay(dayNum, btnElement) {
+            document.querySelectorAll('.day-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById('day' + dayNum).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            btnElement.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
