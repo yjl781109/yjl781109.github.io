@@ -13,7 +13,6 @@
             --morandi-blue: #8FA2B5;
             --morandi-green: #9DAF9B;
             --morandi-pink: #C5A0A0;
-            --naver-green: #03C75A;
             --border-color: #33373E;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -132,7 +131,6 @@
             font-weight: 500;
         }
         .tag-food { background-color: rgba(197, 160, 160, 0.15); color: var(--morandi-pink); }
-        .tag-spot { background-color: rgba(157, 175, 155, 0.15); color: var(--morandi-green); }
         .map-btn { background-color: rgba(3, 199, 90, 0.12); color: #20D071; border: 1px solid rgba(3, 199, 90, 0.25); }
 
         .nav-bar {
@@ -179,7 +177,6 @@
             z-index: 1000;
         }
 
-        /* PDF 列印優化 */
         @media print {
             body { background-color: #FFFFFF !important; color: #000000 !important; padding: 0 !important; }
             .nav-bar, .toast, .btn-group { display: none !important; }
@@ -201,54 +198,52 @@
     </header>
 
     <div class="flight-card">
-        <h3>Flight Information</h3>
+        <h3>Flight & Accommodation</h3>
         <div class="flight-row">
-            <span>去程 (8/10)：TPE T1 ➔ PUS</span>
-            <span>13:35 - 17:05</span>
+            <span>去程 (8/10 Mon)：TPE T2 ➔ PUS</span>
+            <span>13:30 - 17:05 (BX794)</span>
         </div>
         <div class="flight-row">
-            <span>回程 IT607 (8/15)：PUS ➔ TPE T1</span>
-            <span>20:45 - 22:10</span>
+            <span>回程 (8/15 Sat)：PUS ➔ TPE T1</span>
+            <span>20:45 - 22:10 (IT607)</span>
+        </div>
+        <div class="flight-row" style="margin-top: 8px; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+            <span>🏠 住宿：廣安里民宿 (近民樂水濱路)</span>
         </div>
     </div>
 
-    <!-- DAY 1 -->
     <div id="day1" class="day-panel active">
         <div class="day-info-bar">
             <span class="date">Day 1 · 8/10 (週一)</span>
-            <span class="subtitle">抵達與廣安里夜景</span>
+            <span class="subtitle">搭機啟程與手打炸醬麵</span>
         </div>
         <div class="timeline">
             <div class="item">
-                <div class="time">11:35</div>
-                <div class="title">桃園國際機場 T1 報到</div>
-                <div class="desc">13:35 起飛，請提前 2 小時抵達辦理登機。</div>
+                <div class="time">11:30</div>
+                <div class="title">桃園國際機場 T2 報到</div>
+                <div class="desc">搭乘釜山航空 BX 794，請提前 2 小時抵達第二航廈辦理登機與託運行李。</div>
             </div>
             <div class="item">
-                <div class="time">17:05</div>
-                <div class="title">抵達金海國際機場</div>
-                <div class="desc">辦理入境與提領行李。</div>
+                <div class="time">13:30 - 17:05</div>
+                <div class="title">BX 794 起飛 ➔ 抵達金海機場 🛃</div>
+                <div class="desc">辦理入境後提領行李，搭乘計程車前往廣安里民宿（車程約 45 分鐘）。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/김해국제공항" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">18:15</div>
-                <div class="title">搭乘計程車</div>
-                <div class="desc">直達廣安里民宿（車程約 50 分鐘）。</div>
-            </div>
-            <div class="item">
                 <div class="time">20:00</div>
-                <div class="title">晚餐：味贊王鹽烤肉</div>
+                <div class="title">晚餐：30年傳統手打炸醬麵 🍜</div>
+                <div class="desc">品嚐彈性絕佳的現拉手工麵條，大火炒製的香濃黑醬與酥脆糖醋肉。</div>
                 <div class="btn-group">
-                    <button class="tag-btn tag-food" onclick="copyText('맛찬들왕소금구이 광안리점')">📋 複製韓文</button>
-                    <a class="map-btn" href="https://map.naver.com/v5/search/맛찬들왕소금구이%20광안리점" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('30년전통손짜장')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/30년전통손짜장" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
                 <div class="time">21:30</div>
-                <div class="title">廣安里海灘散步</div>
-                <div class="desc">欣賞廣安大橋夜景，感受海風與慢活氛圍。</div>
+                <div class="title">廣安里海灘散步 🌉</div>
+                <div class="desc">漫步沙灘吹海風，欣賞絕美的廣安大橋夜景燈光秀。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/광안리해수욕장" target="_blank">🗺️ Naver Map</a>
                 </div>
@@ -256,228 +251,265 @@
         </div>
     </div>
 
-    <!-- DAY 2 -->
     <div id="day2" class="day-panel">
         <div class="day-info-bar">
             <span class="date">Day 2 · 8/11 (週二)</span>
-            <span class="subtitle">海雲台海岸與當代展覽</span>
+            <span class="subtitle">青沙浦海岸風光與奢華醬海鮮</span>
         </div>
         <div class="timeline">
             <div class="item">
-                <div class="time">11:00</div>
-                <div class="title">天空膠囊列車 🚟</div>
-                <div class="desc">尾浦站 ➔ 青沙浦站（需提前預約包廂）。</div>
+                <div class="time">09:00</div>
+                <div class="title">早餐：Famous Benny 🥑</div>
+                <div class="desc">廣安里民樂洞超人氣澳式早午餐，班尼迪克蛋美味，環境慵懶愜意，且為寵物友善空間。</div>
                 <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/해운대블루라인파크%20미포정거장" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('Famous Benny')">📋 複製店名</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/페이머스베니" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">11:40</div>
-                <div class="title">午餐：青沙浦海景餐廳</div>
-                <div class="desc">享用在地烤貝類或海鮮料理。</div>
+                <div class="time">11:00</div>
+                <div class="title">搭乘海岸列車 / 計程車 ➔ 青沙浦 🚊</div>
+                <div class="desc">改搭「海岸列車（Beach Train）」或直接搭乘計程車直達青沙浦。抵達後輕鬆拍攝「韓版灌籃高手平交道」與雙子紅白燈塔，順道欣賞海景。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/해운대블루라인파크%20청사포정거장" target="_blank">🗺️ Naver Map</a>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/청사포빨간등대" target="_blank">🗺️ Naver Map</a>
+                </div>
             </div>
             <div class="item">
-                <div class="time">13:00</div>
-                <div class="title">青沙浦踏石觀景台</div>
-                <div class="desc">漫步天空步道，於海岸咖啡廳放空。</div>
+                <div class="time">12:30</div>
+                <div class="title">午餐：密陽血腸豬肉湯飯 (海雲台店) 🍲</div>
+                <div class="desc">【行程唯一指定豬肉湯飯】釜山傳奇名店。湯頭用牛豬骨熬製清爽不腥，推薦豬肉加血腸的完美組合！</div>
                 <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/청사포다릿돌전망대" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('밀양순대돼지국밥 해운대점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/밀양순대돼지국밥%20해운대" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
                 <div class="time">15:00</div>
                 <div class="title">Werner Bronkhorst 藝術展 🎨</div>
-                <div class="desc">Grand Josun Busan 4樓《The World’s a Canvas》。</div>
+                <div class="desc">Grand Josun Busan 4樓，欣賞《The World’s a Canvas》潮流畫展。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/그랜드조선%20부산" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">16:30</div>
-                <div class="title">海雲台沙灘 & 傳統市場</div>
-                <div class="desc">出展場漫步沙灘，隨意漫逛周邊商圈。</div>
-                <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/해운대시시장" target="_blank">🗺️ Naver Map</a>
-                </div>
-            </div>
-            <div class="item">
                 <div class="time">18:00</div>
-                <div class="title">晚餐：伍班長烤肉 / 錦繡河豚湯</div>
+                <div class="title">晚餐：海雲台 尾浦家 (미포집) 🦀</div>
+                <div class="desc">【生海鮮重頭戲】排滿整盤的生醬蟹、醬蝦、鮑魚與章魚，倒入麻油與生蛋黃拌飯，極致鮮美！</div>
                 <div class="btn-group">
-                    <button class="tag-btn tag-food" onclick="copyText('오반장')">📋 複製伍班長</button>
-                    <a class="map-btn" href="https://map.naver.com/v5/search/오반장" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('미포집 해운대본점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/미포집%20해운대" target="_blank">🗺️ Naver Map</a>
                 </div>
-            </div>
-            <div class="item">
-                <div class="time">19:30</div>
-                <div class="title">海雲台夜間散步</div>
-                <div class="desc">吹海風散步後，輕鬆搭車返回廣安里民宿。</div>
             </div>
         </div>
     </div>
 
-    <!-- DAY 3 -->
     <div id="day3" class="day-panel">
         <div class="day-info-bar">
             <span class="date">Day 3 · 8/12 (週三)</span>
-            <span class="subtitle">影島白淺灘與松葉蟹饗宴</span>
+            <span class="subtitle">影島海岸與新東亞活海鮮</span>
         </div>
         <div class="timeline">
             <div class="item">
+                <div class="time">09:00</div>
+                <div class="title">早餐：Your Type 🥖</div>
+                <div class="desc">廣安里巷弄超高質感的法式吐司與鹹派專賣店，熱濃湯搭配金黃法式吐司，拍照極美。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('Your Type')">📋 複製店名</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/유어타입%20광안" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
                 <div class="time">11:00</div>
-                <div class="title">影島白淺灘文化村</div>
-                <div class="desc">沿懸崖海岸步道散步，選家海景咖啡廳坐坐。</div>
+                <div class="title">影島白淺灘文化村 🌊</div>
+                <div class="desc">漫步懸崖海岸步道，探訪沿途唯美的白色小屋與海景咖啡廳。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/흰여울문화마을" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
                 <div class="time">16:30</div>
-                <div class="title">晚餐：新東亞水產物綜合市場 🦀</div>
-                <div class="desc">挑選鮮甜松葉蟹現場代客料理，附蟹膏炒飯。</div>
+                <div class="title">晚餐：新東亞水產物綜合市場 🐙</div>
+                <div class="desc">【現撈生海鮮】比起札嘎其更少觀光喊價，現場挑選鮮甜松葉蟹、生魚片與扭動的活章魚代客料理。</div>
                 <div class="btn-group">
                     <button class="tag-btn tag-food" onclick="copyText('신동아수산물종합시장')">📋 複製韓文</button>
                     <a class="map-btn" href="https://map.naver.com/v5/search/신동아수산물종합시장" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">18:30</div>
-                <div class="title">龍頭山公園 & 釜山塔</div>
-                <div class="desc">搭手扶梯登塔，俯瞰港灣夕陽與夜景。</div>
+                <div class="time">19:00</div>
+                <div class="title">南浦洞樂天百貨頂樓觀景台 🌃</div>
+                <div class="desc">吃完海鮮後散步至鄰近的樂天百貨，前往頂樓空中花園遠眺釜山港與影島大橋的美麗夜景。</div>
                 <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/용두산공원" target="_blank">🗺️ Naver Map</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="time">19:30</div>
-                <div class="title">南浦洞商圈 / BIFF 廣場</div>
-                <div class="desc">漫步享用黑糖堅果糖餅，隨後返回民宿。</div>
-                <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/BIFF광장" target="_blank">🗺️ Naver Map</a>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/롯데백화점%20광복점" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- DAY 4 -->
     <div id="day4" class="day-panel">
         <div class="day-info-bar">
             <span class="date">Day 4 · 8/13 (週四)</span>
-            <span class="subtitle">極速斜坡滑車與五星汗蒸幕</span>
+            <span class="subtitle">急速斜坡車與 Centum City 奢華放鬆</span>
         </div>
         <div class="timeline">
             <div class="item">
+                <div class="time">09:00</div>
+                <div class="title">早餐：153九浦肉湯麵 🍜</div>
+                <div class="desc">熱騰騰、極致清甜的鯷魚細湯麵，配上一大條現包紫菜包飯，清爽溫和地開啟今天。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('153구포국수 광안리점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/153구포국수%20광안" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
                 <div class="time">11:00</div>
-                <div class="title">機張 Skyline Luge 🏎️</div>
-                <div class="desc">搭纜車上山，駕駛斜坡滑車俯衝體驗速度感。</div>
+                <div class="title">機張 Skyline Luge 斜坡滑車 🏎️</div>
+                <div class="desc">不需預約。持電子票直接進場換票。享受從山頂俯衝而下的極速快感！（建議玩 2 回）。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/스카이라인루지%20부산" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
                 <div class="time">13:00</div>
-                <div class="title">午餐：Centum City 百貨</div>
-                <div class="desc">美食街自由享用午餐。</div>
-                <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/신세계백화점%20센텀시티점" target="_blank">🗺️ Naver Map</a>
-                </div>
+                <div class="title">中午：SPA LAND 2樓餐廳 🥘</div>
+                <div class="desc">直接進入 SPA LAND，免去人擠人。換好衣服在館內享用美味的石鍋拌飯或炸豬排。消費滿一萬韓元，出場時間還可從 4 小時免費延長至 6 小時！</div>
             </div>
             <div class="item">
                 <div class="time">14:30</div>
-                <div class="title">SPA LAND 汗蒸幕 ♨️</div>
-                <div class="desc">體驗五星級熱療室與溫泉，舒緩疲勞（限時 4 小時）。</div>
+                <div class="title">SPA LAND 五星級汗蒸幕 ♨️</div>
+                <div class="desc">享受各種溫度的天然熱療房，體驗傳統搓澡，必喝甜米釀配溫泉蛋。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/스파랜드%20센텀시티" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">19:00</div>
-                <div class="title">晚餐：外帶橋村炸雞</div>
-                <div class="desc">回民宿一邊看廣安里夜景一邊享用。</div>
+                <div class="time">18:30</div>
+                <div class="title">新世界百貨 Centum City 店大逛特逛 🛍️</div>
+                <div class="desc">通往亞洲最大百貨，館內齊聚各式韓國潮牌、精品與甜點伴手禮，出汗蒸幕後直接開逛！</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/신세계백화점%20센텀시티점" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">19:30</div>
+                <div class="title">晚餐：88部隊鍋 (海雲台 Centum 店) 🥘</div>
+                <div class="desc">【部隊鍋】滾燙的紅湯鋪滿厚實火腿、培根與融化起司，拉麵無限續加，湯頭濃郁過癮！</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('88부대찌개')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/88부대찌개" target="_blank">🗺️ Naver Map</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- DAY 5 -->
     <div id="day5" class="day-panel">
         <div class="day-info-bar">
             <span class="date">Day 5 · 8/14 (週五)</span>
-            <span class="subtitle">甘川壁畫村與西面美食</span>
+            <span class="subtitle">彩繪山城與舊城市場商圈大巡禮</span>
         </div>
         <div class="timeline">
             <div class="item">
+                <div class="time">09:00</div>
+                <div class="title">早餐：EGG DROP 🥪</div>
+                <div class="desc">韓國國民厚片爆漿吐司，夾滿滑蛋與香煎培根。外帶一份坐在廣安里海邊享用最對味。</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('에그드랍 광안리점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/에그드랍%20광안리" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
                 <div class="time">11:00</div>
-                <div class="title">甘川文化村</div>
-                <div class="desc">漫步彩繪山城，與小王子與沙漠狐狸合照。</div>
+                <div class="title">甘川文化村 🏠</div>
+                <div class="desc">漫步繽紛的彩繪山城，探訪各式特色文創小店，拍下小王子的背影。</div>
                 <div class="btn-group">
                     <a class="map-btn" href="https://map.naver.com/v5/search/감천문화마을" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">14:00</div>
-                <div class="title">午餐：西面豬肉湯飯</div>
-                <div class="desc">體驗松亭三代豬肉湯飯等在地經典美食。</div>
+                <div class="time">13:30</div>
+                <div class="title">富平罐頭市場 & 國際市場 🛍️</div>
+                <div class="desc">甘川文化村下山即達！體驗最地道的釜山傳統市場魅力，感受經典電影《國際市場》的懷舊氛圍，巷弄間有各式雜貨與小吃。</div>
                 <div class="btn-group">
-                    <button class="tag-btn tag-food" onclick="copyText('송정3대국밥')">📋 複製松亭三代</button>
-                    <a class="map-btn" href="https://map.naver.com/v5/search/송정3대국밥" target="_blank">🗺️ Naver Map</a>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/부평깡통시장" target="_blank">🗺️ Naver Map</a>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/국제시장" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
-                <div class="time">15:30</div>
-                <div class="title">西面潮流商圈 / 地下街</div>
-                <div class="desc">慢逛潮流服飾與補貨伴手禮。</div>
+                <div class="time">15:00</div>
+                <div class="title">BIFF 廣場 & 光復路時尚街 🥞</div>
+                <div class="desc">過個馬路即達！必吃排隊美食「黑糖堅果糖餅（씨앗호떡）」，隨後可順著光復路商圈大逛特逛韓國潮牌與美妝店。</div>
                 <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/서면역" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('BIFF광장')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/BIFF광장" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">18:00</div>
+                <div class="title">晚餐：味贊王鹽烤肉 (南浦店) 🥩</div>
+                <div class="desc">【唯一烤肉名額】全釜山最強代烤熟成五花肉！3.5 cm 超厚肉塊由專人烤到外酥脆、內爆汁，免動手只需享受！</div>
+                <div class="btn-group">
+                    <button class="tag-btn tag-food" onclick="copyText('맛찬들왕소금구이 남포점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/맛찬들왕소금구이%20남포점" target="_blank">🗺️ Naver Map</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="time">19:30</div>
+                <div class="title">龍頭山公園 / 釜山塔夜景 🌃</div>
+                <div class="desc">吃飽後順著光復路手扶梯直達龍頭山公園，欣賞舊城區璀璨夜景，劃下完美句點。</div>
+                <div class="btn-group">
+                    <a class="map-btn" href="https://map.naver.com/v5/search/용두산공원" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- DAY 6 -->
     <div id="day6" class="day-panel">
         <div class="day-info-bar">
             <span class="date">Day 6 · 8/15 (週六)</span>
-            <span class="subtitle">廣安里巡禮與返台</span>
+            <span class="subtitle">清爽河蜆與全韓最強碳燻炸豬排</span>
         </div>
         <div class="timeline">
             <div class="item">
-                <div class="time">11:30</div>
-                <div class="title">退房 ➔ 地鐵廣安站置物 🧳</div>
-                <div class="desc">將行李鎖在廣安站儲物櫃（T-Locker），雙手放空。</div>
+                <div class="time">10:00</div>
+                <div class="title">早餐：廣安大吉老奶奶河蜆湯 🍲</div>
+                <div class="desc">廣安里知名老店。大碗滿滿、無沙極鮮甜的河蜆高湯，配上豐富小菜與香噴噴的韓式拌飯，最溫暖的早餐。</div>
                 <div class="btn-group">
-                    <button class="tag-btn tag-spot" onclick="copyText('광안역')">📋 複製廣安站</button>
-                    <a class="map-btn" href="https://map.naver.com/v5/search/광안역" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('할매재첩국 광안리점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/할매재첩국%20광안" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
+                <div class="time">11:30</div>
+                <div class="title">退房 ➔ 廣安站寄放行李 🧳</div>
+                <div class="desc">將大行李存放在廣安站（T-Locker置物櫃），兩手空空開始漫活。</div>
+            </div>
+            <div class="item">
                 <div class="time">12:00</div>
-                <div class="title">午餐：廣安里 彥陽烤牛肉</div>
+                <div class="title">午餐：廣安里 톤쇼우 (Toneou 豚秀) 🥩</div>
+                <div class="desc">【神級炸豬排】全韓國排隊最瘋狂的 Berkshire K 黑豬肉炸豬排！肉質帶有絕美煙燻粉紅色與炭香，多汁無比，完美收尾。</div>
                 <div class="btn-group">
-                    <button class="tag-btn tag-food" onclick="copyText('언양불고기 부산')">📋 複製烤肉店</button>
-                    <a class="map-btn" href="https://map.naver.com/v5/search/언양불고기부산집" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('톤쇼우 광안점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/톤쇼우%20광안" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
                 <div class="time">13:30</div>
-                <div class="title">海景咖啡廳下午茶</div>
-                <div class="desc">廣安里海灘最後放空漫步。</div>
-            </div>
-            <div class="item">
-                <div class="time">16:30</div>
-                <div class="title">取行李 ➔ 計程車前往機場</div>
-                <div class="desc">返回廣安站取行李後，直接搭計程車前往金海機場。</div>
-            </div>
-            <div class="item">
-                <div class="time">18:00</div>
-                <div class="title">抵達金海機場報到 🛃</div>
-                <div class="desc">辦理登機與退稅手續。</div>
+                <div class="title">自然島鹽麵包 & 海景下午茶 🥐</div>
+                <div class="desc">外帶剛出爐、奶油香氣沖天的自然島鹽麵包，在廣安里海灘邊伴隨咖啡享受最後的慢活時光。</div>
                 <div class="btn-group">
-                    <a class="map-btn" href="https://map.naver.com/v5/search/김해국제공항" target="_blank">🗺️ Naver Map</a>
+                    <button class="tag-btn tag-food" onclick="copyText('자연도소금빵 광안리점')">📋 複製韓文</button>
+                    <a class="map-btn" href="https://map.naver.com/v5/search/자연도소금빵%20광안리" target="_blank">🗺️ Naver Map</a>
                 </div>
             </div>
             <div class="item">
+                <div class="time">16:30</div>
+                <div class="title">取行李 ➔ 計程車前往金海機場 ✈️</div>
+                <div class="desc">回到廣安站取回行李，直接搭乘計程車前往金海機場（約45分鐘車程）。</div>
+            </div>
+            <div class="item">
                 <div class="time">20:45</div>
-                <div class="title">IT607 航班起飛 ✈️</div>
+                <div class="title">IT607 航班起飛，返台</div>
                 <div class="desc">預計 22:10 抵達桃園國際機場 T1。</div>
             </div>
         </div>
@@ -512,6 +544,7 @@
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toast');
+                toast.innerText = '已複製：' + text;
                 toast.style.display = 'block';
                 setTimeout(() => { toast.style.display = 'none'; }, 1500);
             });
